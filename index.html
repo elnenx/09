@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIZTR ESSENS</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #E0E0E0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .logo-font {
+            font-family: 'Syncopate', sans-serif; 
+        }
+
+        .fade-transition {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .out-of-stock {
+            background: linear-gradient(to top left, transparent 48%, #9ca3af 49%, #9ca3af 51%, transparent 52%);
+            color: #9ca3af;
+            border-color: #d1d5db;
+            pointer-events: none;
+        }
+
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.open {
+            max-height: 1000px;
+            opacity: 1;
+        }
+
+        /* تنسيقات خاصة بصفحة الدفع (Checkout) */
+        .checkout-input {
+            width: 100%;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            background-color: #ffffff;
+            transition: all 0.2s;
+        }
+        .checkout-input:focus {
+            outline: none;
+            border-color: #000;
+            box-shadow: 0 0 0 1px #000;
+        }
+        .checkout-radio-group {
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+        .checkout-radio-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #d1d5db;
+            cursor: pointer;
+        }
+        .checkout-radio-item:last-child {
+            border-bottom: none;
+        }
+        .checkout-radio-item.active {
+            background-color: #f9fafb;
+            border-color: #000;
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <!-- Global Header -->
+    <header class="bg-black text-white flex justify-between items-center px-4 py-4 sm:px-6 z-50 sticky top-0 shadow-md">
+        <button class="text-white focus:outline-none hover:text-gray-300 transition" aria-label="Menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 8h16M4 16h16"/>
+            </svg>
+        </button>
+
+        <div onclick="showPage('home-page')" class="logo-font text-base sm:text-lg tracking-[0.1em] font-bold uppercase mt-1 cursor-pointer">
+            LIZTR ESSENS
+        </div>
+
+        <div class="flex gap-4 items-center">
+            <button class="text-white focus:outline-none hover:text-gray-300 transition" aria-label="Account">
+                <i class="ph ph-user text-[22px]"></i>
+            </button>
+            <button class="text-white focus:outline-none hover:text-gray-300 transition" aria-label="Cart">
+                <i class="ph ph-bag text-[22px]"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         1. الصفحة الرئيسية (HOME PAGE)
+         ========================================== -->
+    <div id="home-page" class="block w-full">
+        <!-- Hero Section -->
+        <section class="relative w-full h-[75vh] sm:h-[80vh] bg-cover bg-center bg-no-repeat"
+                 style="background-image: url('https://res.cloudinary.com/dyhlzplzb/image/upload/v1787448815/769484264_17902768323472304_3406907886049304879_n_k5q43c.jpg'); background-position: top center;">
+            <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
+            <div class="absolute bottom-8 left-5 sm:left-8 z-10">
+                <h1 class="text-white text-[32px] sm:text-5xl font-bold tracking-tight mb-4">LOST ERA (SS26)</h1>
+                <a href="#" class="inline-block border border-white text-white px-8 py-3 text-[13px] font-bold uppercase tracking-wide hover:bg-white hover:text-black transition-colors duration-300">SHOP NOW</a>
+            </div>
+        </section>
+
+        <!-- NEW ARRIVALS -->
+        <section class="w-full px-5 pt-12 pb-4 flex justify-between items-end bg-[#E0E0E0] text-black">
+            <h2 class="text-[20px] sm:text-[26px] font-bold tracking-tight uppercase">NEW ARRIVALS</h2>
+            <a href="#" class="text-[14px] sm:text-base font-semibold pb-1 hover:underline">View all</a>
+        </section>
+
+        <section class="w-full px-5 pb-8 bg-[#E0E0E0]">
+            <div class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
+                <a onclick="openProduct('DARK OLIVE 09 JRSY', '790', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787450019/1_3a9e03c1-ce69-4e3b-b921-337b1b4e8a91_fnryux.png')" class="flex flex-col group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787450019/1_3a9e03c1-ce69-4e3b-b921-337b1b4e8a91_fnryux.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-[12px] sm:text-sm font-bold text-black uppercase leading-snug tracking-tight truncate pr-2">DARK OLIVE 09 JRSY</h3>
+                    <div class="flex items-center gap-2 mt-1.5">
+                        <span class="text-[13px] sm:text-sm font-bold text-black">790 L.E</span>
+                        <span class="text-[11px] sm:text-xs font-medium text-gray-500 line-through">850 L.E</span>
+                    </div>
+                </a>
+                <a onclick="openProduct('GRAY CAMO 09 JRSY', '790', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787450018/0_9e1e3d9b-0df5-41f2-afae-d3cbd4085653_o7dv21.png')" class="flex flex-col group cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787450018/0_9e1e3d9b-0df5-41f2-afae-d3cbd4085653_o7dv21.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <h3 class="text-[12px] sm:text-sm font-bold text-black uppercase leading-snug tracking-tight truncate pr-2">GRAY CAMO 09 JRSY</h3>
+                    <div class="flex items-center gap-2 mt-1.5">
+                        <span class="text-[13px] sm:text-sm font-bold text-black">790 L.E</span>
+                        <span class="text-[11px] sm:text-xs font-medium text-gray-500 line-through">850 L.E</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- CAMO SERIES LOOKBOOK -->
+        <section class="w-full px-5 pt-8 pb-4 flex justify-between items-end bg-[#E0E0E0] text-black border-t border-gray-300">
+            <h2 class="text-[20px] sm:text-[26px] font-bold tracking-tight uppercase">CAMO SERIES LOOKBOOK</h2>
+        </section>
+
+        <section class="relative w-full h-[85vh] min-h-[600px] bg-[#E0E0E0] overflow-hidden">
+            <img id="interactive-img-camo" src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787453476/2_20260823_055048_0001_wfsfjm.png" alt="Camo Outfit" class="absolute inset-0 w-full h-full object-cover object-top sm:object-center mix-blend-multiply fade-transition z-0">
+            <div class="absolute left-4 sm:left-12 top-1/2 -translate-y-1/2 z-10 flex flex-row items-center gap-3 sm:gap-5 pointer-events-none">
+                <h2 id="interactive-name-camo" class="text-xl sm:text-3xl font-black uppercase tracking-[0.2em] text-black [writing-mode:vertical-rl] rotate-180 fade-transition logo-font whitespace-nowrap drop-shadow-md">DARK OLIVE 09 JRSY</h2>
+                <div class="flex flex-row items-center gap-2 sm:gap-4 [writing-mode:vertical-rl] rotate-180 whitespace-nowrap drop-shadow-md">
+                    <span class="text-base sm:text-xl font-bold text-black">790 L.E</span>
+                    <span class="text-xs sm:text-sm font-medium text-gray-600 line-through">850 L.E</span>
+                </div>
+            </div>
+            <div class="absolute right-4 sm:right-12 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center gap-5 sm:gap-6">
+                <button onclick="changeCamoVariant('dark')" id="swatch-camo-dark" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-black ring-2 ring-offset-2 ring-black ring-offset-[#E0E0E0] bg-[#42473D] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+                <button onclick="changeCamoVariant('gray')" id="swatch-camo-gray" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-400 ring-offset-2 ring-offset-[#E0E0E0] bg-[#8B8D8F] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+            </div>
+        </section>
+
+        <!-- SOLID COLLECTION (Slider) -->
+        <section class="w-full pt-12 pb-12 bg-[#E0E0E0] border-t border-gray-300">
+            <div class="px-5 mb-8 flex justify-between items-end">
+                <h2 class="text-[20px] sm:text-[26px] font-bold tracking-tight uppercase text-black">SOLID COLLECTION</h2>
+            </div>
+            <div id="product-slider" class="flex gap-4 sm:gap-6 px-5 overflow-x-auto hide-scrollbar cursor-grab select-none">
+                <div onclick="openProduct('OLIVE 09 JRSY', '690', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455252/1_b4f97eca-e3fc-4cf3-a74f-113ec1e97c5e_wwuspd.png')" class="flex-none w-[65%] sm:w-[35%] md:w-[22%] flex flex-col group slider-item cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm pointer-events-none">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455252/1_b4f97eca-e3fc-4cf3-a74f-113ec1e97c5e_wwuspd.png" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-[12px] sm:text-sm font-bold text-black uppercase leading-snug tracking-tight truncate">OLIVE 09 JRSY</h3>
+                    <div class="flex items-center gap-2 mt-1.5 pointer-events-none">
+                        <span class="text-[13px] sm:text-sm font-bold text-black">690 L.E</span>
+                        <span class="text-[11px] sm:text-xs font-medium text-gray-500 line-through">850 L.E</span>
+                    </div>
+                </div>
+                <div onclick="openProduct('RED WINE 09 JRSY', '690', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455254/red_wine_jersey_l4eoov.png')" class="flex-none w-[65%] sm:w-[35%] md:w-[22%] flex flex-col group slider-item cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm pointer-events-none">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455254/red_wine_jersey_l4eoov.png" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-[12px] sm:text-sm font-bold text-black uppercase leading-snug tracking-tight truncate">RED WINE 09 JRSY</h3>
+                    <div class="flex items-center gap-2 mt-1.5 pointer-events-none">
+                        <span class="text-[13px] sm:text-sm font-bold text-black">690 L.E</span>
+                        <span class="text-[11px] sm:text-xs font-medium text-gray-500 line-through">850 L.E</span>
+                    </div>
+                </div>
+                <div onclick="openProduct('BLACK 09 JRSY', '690', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455253/1_b6c07e54-8ca6-4d0e-9388-2d5172d83a28_w9vulr.png')" class="flex-none w-[65%] sm:w-[35%] md:w-[22%] flex flex-col group slider-item cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm pointer-events-none">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455253/1_b6c07e54-8ca6-4d0e-9388-2d5172d83a28_w9vulr.png" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-[12px] sm:text-sm font-bold text-black uppercase leading-snug tracking-tight truncate">BLACK 09 JRSY</h3>
+                    <div class="flex items-center gap-2 mt-1.5 pointer-events-none">
+                        <span class="text-[13px] sm:text-sm font-bold text-black">690 L.E</span>
+                        <span class="text-[11px] sm:text-xs font-medium text-gray-500 line-through">850 L.E</span>
+                    </div>
+                </div>
+                <div onclick="openProduct('WHITE 09 JRSY', '690', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455255/1_f363cc9c-6fe0-44a9-be62-965c9873fd4d_sqovcf.png')" class="flex-none w-[65%] sm:w-[35%] md:w-[22%] flex flex-col group slider-item cursor-pointer">
+                    <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm pointer-events-none">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455255/1_f363cc9c-6fe0-44a9-be62-965c9873fd4d_sqovcf.png" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-[12px] sm:text-sm font-bold text-black uppercase leading-snug tracking-tight truncate">WHITE 09 JRSY</h3>
+                    <div class="flex items-center gap-2 mt-1.5 pointer-events-none">
+                        <span class="text-[13px] sm:text-sm font-bold text-black">690 L.E</span>
+                        <span class="text-[11px] sm:text-xs font-medium text-gray-500 line-through">850 L.E</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOLID LOOKBOOK -->
+        <section class="w-full px-5 pt-8 pb-4 flex justify-between items-end bg-[#E0E0E0] text-black border-t border-gray-300">
+            <h2 class="text-[20px] sm:text-[26px] font-bold tracking-tight uppercase">SOLID SERIES LOOKBOOK</h2>
+        </section>
+
+        <section class="relative w-full h-[85vh] min-h-[600px] bg-[#E0E0E0] overflow-hidden">
+            <img id="interactive-img-solid" src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455932/3_20260823_063129_0000_ulofbv.png" alt="Solid Outfit" class="absolute inset-0 w-full h-full object-cover object-top sm:object-center mix-blend-multiply fade-transition z-0">
+            <div class="absolute left-4 sm:left-12 top-1/2 -translate-y-1/2 z-10 flex flex-row items-center gap-3 sm:gap-5 pointer-events-none">
+                <h2 id="interactive-name-solid" class="text-xl sm:text-3xl font-black uppercase tracking-[0.2em] text-black [writing-mode:vertical-rl] rotate-180 fade-transition logo-font whitespace-nowrap drop-shadow-md">OLIVE 09 JRSY</h2>
+                <div class="flex flex-row items-center gap-2 sm:gap-4 [writing-mode:vertical-rl] rotate-180 whitespace-nowrap drop-shadow-md">
+                    <span class="text-base sm:text-xl font-bold text-black">690 L.E</span>
+                    <span class="text-xs sm:text-sm font-medium text-gray-600 line-through">850 L.E</span>
+                </div>
+            </div>
+            <div class="absolute right-4 sm:right-12 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center gap-5 sm:gap-6">
+                <button onclick="changeSolidVariant('olive')" id="swatch-solid-olive" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-black ring-2 ring-offset-2 ring-black ring-offset-[#E0E0E0] bg-[#3B4138] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+                <button onclick="changeSolidVariant('wine')" id="swatch-solid-wine" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-400 ring-offset-2 ring-offset-[#E0E0E0] bg-[#4a1c22] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+                <button onclick="changeSolidVariant('black')" id="swatch-solid-black" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-400 ring-offset-2 ring-offset-[#E0E0E0] bg-[#1a1a1a] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+                <button onclick="changeSolidVariant('white')" id="swatch-solid-white" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-400 ring-offset-2 ring-offset-[#E0E0E0] bg-[#fdfdfd] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="w-full py-20 bg-[#E0E0E0] border-t border-gray-300 flex flex-col items-center justify-center text-center px-6">
+            <p class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-1 text-black">What cult says</p>
+            <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-2 text-black">TESTIMONIALS</h2>
+            <p class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-10 text-black">6835+ CUSTOMERS</p>
+
+            <div class="flex gap-1.5 mb-8 text-black">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+
+            <p class="text-lg sm:text-2xl md:text-3xl font-medium uppercase leading-[1.4] max-w-3xl mb-8 text-black tracking-tight">
+                YOU CAN FEEL THE QUALITY AS SOON AS YOU HOLD IT. THE MESH AND PRINT BOTH FEEL PREMIUM AND THE FIT IS PROPERLY RELAXED.
+            </p>
+
+            <p class="text-sm sm:text-base font-bold uppercase tracking-widest mb-1 text-black">AHMED NADER</p>
+            <p class="text-[11px] sm:text-xs text-gray-500 font-bold uppercase tracking-widest mb-12">PURCHASED: OLIVE 09 JRSY</p>
+
+            <div class="w-full max-w-md h-[1px] bg-gray-400 relative">
+                <div class="absolute left-0 top-0 h-[2px] bg-black w-1/4 -mt-[0.5px]"></div>
+            </div>
+        </section>
+
+        <!-- HOW TO WEAR -->
+        <section class="w-full pt-16 pb-20 bg-[#E0E0E0] border-t border-gray-300">
+            <div class="px-5 mb-8">
+                <p class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-1 text-black">FROM THE CULT.</p>
+                <h2 class="text-4xl sm:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-2 text-black w-3/4 sm:w-full">
+                    HOW TO WEAR LIZTR ESSENS
+                </h2>
+                <p class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-black">HOW THE STREETS ROCK ESSENS.</p>
+            </div>
+            
+            <div class="flex gap-4 sm:gap-6 px-5 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-4">
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-black snap-center rounded-sm overflow-hidden shadow-sm">
+                    <video src="https://res.cloudinary.com/dyhlzplzb/video/upload/v1787456629/53cbd7eb08a446d88779496536f32cc3.HD-720p-1.6Mbps-91133629_jt9mgf.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-gray-300 snap-center rounded-sm overflow-hidden shadow-sm">
+                    <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787456632/8_ee23580e-a8ce-4437-97a0-8797815b05c0_y05deg.png" alt="Streetwear Style" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-gray-300 snap-center rounded-sm overflow-hidden shadow-sm">
+                    <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787456634/7_407866ce-6e8e-4cd9-86aa-44793a330a17_ythby4.jpg" alt="Streetwear Style" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-black snap-center rounded-sm overflow-hidden shadow-sm">
+                    <video src="https://res.cloudinary.com/dyhlzplzb/video/upload/v1787456642/c5538cf250df4e65bab0f09e4d8a7ca3.HD-1080p-3.3Mbps-91131224_pmulas.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-black snap-center rounded-sm overflow-hidden shadow-sm">
+                    <video src="https://res.cloudinary.com/dyhlzplzb/video/upload/v1787456636/c149ce285a28457db2301dee06ae9784.HD-720p-1.6Mbps-91131223_q0m3ru.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-gray-300 snap-center rounded-sm overflow-hidden shadow-sm">
+                    <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787456633/9_5053471e-c722-48d3-87fa-c8fb22451a85_gxldex.png" alt="Streetwear Style" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <!-- ==========================================
+         2. صفحة تفاصيل المنتج (PRODUCT PAGE)
+         ========================================== -->
+    <div id="product-page" class="hidden w-full bg-[#E0E0E0] pb-24">
+        
+        <div class="w-full bg-[#E0E0E0] relative flex justify-center py-6">
+            <img id="main-product-image" src="" class="w-full max-w-2xl object-cover mix-blend-multiply" alt="Product Image">
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                <div class="w-2 h-2 rounded-full bg-black"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+            </div>
+        </div>
+
+        <div class="w-full border-t border-b border-gray-300 py-3 text-center">
+            <p class="text-[11px] sm:text-xs font-bold tracking-widest uppercase text-black">20 PEOPLE ARE WATCHING THIS RIGHT NOW</p>
+        </div>
+
+        <div class="px-5 py-6 max-w-3xl mx-auto">
+            <h1 id="main-product-title" class="text-3xl sm:text-4xl font-black uppercase tracking-tight mb-2 text-black">Product Name</h1>
+            
+            <div class="flex items-center gap-2 mb-6">
+                <span id="main-product-price" class="text-lg font-bold text-black">LE 0.00</span>
+                <span id="main-product-old-price" class="text-sm font-medium text-gray-500 line-through">LE 850.00</span>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-sm font-bold text-black mb-3">Size</p>
+                <div class="flex flex-wrap gap-2 sm:gap-3">
+                    <button class="w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 flex items-center justify-center font-semibold text-sm out-of-stock">XS</button>
+                    <button class="w-12 h-12 sm:w-14 sm:h-14 border border-black bg-[#E0E0E0] text-black flex items-center justify-center font-semibold text-sm ring-1 ring-black">S</button>
+                    <button class="w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">M</button>
+                    <button class="w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">L</button>
+                    <button class="w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">XL</button>
+                    <button class="w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">2XL</button>
+                </div>
+            </div>
+
+            <div class="flex gap-3 mb-3">
+                <div class="flex items-center justify-between border border-black px-4 py-3 w-32 bg-transparent">
+                    <button class="text-lg font-light focus:outline-none">−</button>
+                    <span class="font-semibold text-sm">1</span>
+                    <button class="text-lg font-light focus:outline-none">+</button>
+                </div>
+                <button class="flex-1 border border-black flex items-center justify-center gap-2 font-bold text-sm uppercase tracking-wider hover:bg-black hover:text-white transition">
+                    <i class="ph ph-tote"></i> ADD TO CART
+                </button>
+            </div>
+            <!-- زر الدفع السريع يقوم بتوجيهك لصفحة الدفع Checkout -->
+            <button onclick="goToCheckout()" class="w-full bg-black text-white py-4 font-bold text-sm uppercase tracking-wider mb-6 hover:bg-gray-800 transition">
+                BUY IT NOW
+            </button>
+
+            <div class="flex justify-center gap-3 mb-10">
+                <div class="bg-blue-700 text-white font-bold italic px-2 py-1 rounded text-xs">VISA</div>
+                <div class="bg-black flex items-center justify-center w-10 h-6 rounded relative overflow-hidden">
+                    <div class="w-4 h-4 bg-red-500 rounded-full absolute left-1 mix-blend-screen"></div>
+                    <div class="w-4 h-4 bg-yellow-500 rounded-full absolute right-1 mix-blend-screen"></div>
+                </div>
+            </div>
+
+            <div class="space-y-4 mb-10 border-t border-gray-300 pt-6">
+                <div class="flex items-center gap-4 text-black">
+                    <i class="ph ph-truck text-2xl"></i>
+                    <p class="text-sm font-bold">Estimated Delivery: <span class="font-medium">3-7 Days</span></p>
+                </div>
+                <div class="flex items-center gap-4 text-black">
+                    <i class="ph ph-arrows-clockwise text-2xl"></i>
+                    <p class="text-sm font-bold">Easy Returns & Exchanges</p>
+                </div>
+                <div class="flex items-center gap-4 text-black">
+                    <i class="ph ph-lock-key text-2xl"></i>
+                    <p class="text-sm font-bold">Secure Payment</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-300">
+                <div class="border-b border-gray-300 py-4">
+                    <button onclick="toggleAccordion('acc-size', 'icon-size')" class="flex justify-between items-center w-full text-left font-bold uppercase text-sm tracking-wide text-gray-700 focus:outline-none">
+                        SIZE & FIT
+                        <span id="icon-size" class="text-xl font-light text-black">−</span>
+                    </button>
+                    <div id="acc-size" class="accordion-content open mt-4 text-sm text-black">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787457324/BLACK_JERSEY_9fd03de2-4ffe-4094-8f3d-e51b91b4cc45_qjuplo.png" alt="Size Chart" class="w-full mb-6 mix-blend-multiply">
+                        <p class="font-bold mb-1 text-base">Model height 184 cm</p>
+                        <p class="font-bold mb-5 text-base">Wearing size M size (for styling only!)</p>
+                        <p class="font-bold text-base">Measurements may vary by ±1 cm due to manufacturing tolerance.</p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-300 py-4">
+                    <button onclick="toggleAccordion('acc-details', 'icon-details')" class="flex justify-between items-center w-full text-left font-bold uppercase text-sm tracking-wide text-gray-700 focus:outline-none">
+                        PRODUCT DETAILS
+                        <span id="icon-details" class="text-xl font-light text-black">+</span>
+                    </button>
+                    <div id="acc-details" class="accordion-content mt-4 text-base text-black space-y-3 font-medium">
+                        <p>Silkscreen+ Halftone Print</p>
+                        <p>Relaxed/ Cropped Fit.</p>
+                        <p>Relaxed Arm Cuff.</p>
+                        <p>Custom Mesh material.</p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-300 py-4">
+                    <button onclick="toggleAccordion('acc-care', 'icon-care')" class="flex justify-between items-center w-full text-left font-bold uppercase text-sm tracking-wide text-gray-700 focus:outline-none">
+                        CARE & MAINTENANCE
+                        <span id="icon-care" class="text-xl font-light text-black">+</span>
+                    </button>
+                    <div id="acc-care" class="accordion-content mt-4 text-base text-black space-y-2 font-medium">
+                        <p>Wash inside out on a cold gentle cycle.</p>
+                        <p>Do not iron directly on the print.</p>
+                        <p>Do not tumble dry.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <h3 class="text-2xl font-black uppercase tracking-tight mb-6">RELATED ITEMS</h3>
+                <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4">
+                    <a onclick="openProduct('WHITE 09 JRSY', '690', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455934/6_20260823_063129_0003_pzftch.png')" class="flex-none w-[45%] flex flex-col group cursor-pointer">
+                        <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm">
+                            <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455934/6_20260823_063129_0003_pzftch.png" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-[12px] font-bold text-black uppercase truncate">WHITE 09 JRSY</h3>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="text-[13px] font-bold text-black">690 L.E</span>
+                        </div>
+                    </a>
+                    <a onclick="openProduct('OLIVE 09 JRSY', '690', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455932/3_20260823_063129_0000_ulofbv.png')" class="flex-none w-[45%] flex flex-col group cursor-pointer">
+                        <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm">
+                            <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455932/3_20260823_063129_0000_ulofbv.png" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-[12px] font-bold text-black uppercase truncate">OLIVE 09 JRSY</h3>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="text-[13px] font-bold text-black">690 L.E</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         3. صفحة الدفع (CHECKOUT PAGE) - بناءً على الصور
+         ========================================== -->
+    <div id="checkout-page" class="hidden w-full bg-[#f5f5f5] min-h-screen text-[#333333]">
+        <div class="max-w-2xl mx-auto p-4 sm:p-6 bg-white sm:mt-6 sm:mb-12 sm:rounded-lg sm:shadow-sm">
+            
+            <!-- Order Summary Section -->
+            <div class="border-b border-gray-200 pb-5 mb-6">
+                <button onclick="toggleAccordion('checkout-summary', 'checkout-icon')" class="w-full flex justify-between items-center py-2 focus:outline-none">
+                    <span class="text-sm text-gray-700 flex items-center gap-2">Order summary <i id="checkout-icon" class="ph ph-caret-up"></i></span>
+                    <span id="checkout-header-total" class="font-bold text-black text-lg">E£0.00</span>
+                </button>
+                
+                <div id="checkout-summary" class="accordion-content open mt-4">
+                    <!-- المنتج -->
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-4 relative">
+                            <div class="relative w-16 h-16 border border-gray-200 rounded-md bg-gray-50 flex items-center justify-center overflow-hidden">
+                                <img id="checkout-img" src="" class="w-full h-full object-cover mix-blend-multiply" alt="Product">
+                                <span class="absolute -top-2 -right-2 bg-gray-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full z-10">1</span>
+                            </div>
+                            <div>
+                                <h3 id="checkout-name" class="text-sm font-medium text-black uppercase">Product Name</h3>
+                                <p class="text-xs text-gray-500 mt-0.5">S</p>
+                            </div>
+                        </div>
+                        <span id="checkout-item-price" class="text-sm font-medium text-black">E£0.00</span>
+                    </div>
+
+                    <!-- كوبون الخصم -->
+                    <div class="flex gap-2 mb-4">
+                        <input type="text" placeholder="Discount code or gift card" class="checkout-input flex-1">
+                        <button class="bg-gray-200 text-gray-400 font-semibold px-4 py-3 rounded-md text-sm cursor-not-allowed">Apply</button>
+                    </div>
+
+                    <!-- حسابات التكلفة -->
+                    <div class="space-y-2 text-sm text-gray-600">
+                        <div class="flex justify-between">
+                            <span>Subtotal</span>
+                            <span id="checkout-subtotal" class="font-medium text-black">E£0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Shipping <i class="ph ph-question text-gray-400 ml-1"></i></span>
+                            <span class="font-medium text-black">E£85.00</span>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-end mt-4 pt-4 border-t border-gray-200">
+                        <span class="text-base font-bold text-black">Total</span>
+                        <div class="text-black">
+                            <span class="text-xs text-gray-500 font-normal mr-1">EGP</span>
+                            <span id="checkout-final-total" class="text-2xl font-bold">E£0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="mb-8">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="text-xl font-bold text-black">Contact</h2>
+                    <a href="#" class="text-sm text-blue-600 hover:underline">Sign in</a>
+                </div>
+                <div class="relative">
+                    <input type="email" placeholder="Email" class="checkout-input">
+                    <i class="ph ph-question text-gray-400 absolute right-3 top-3 text-xl"></i>
+                </div>
+                <label class="flex items-center gap-2 mt-3 cursor-pointer">
+                    <input type="checkbox" checked class="w-5 h-5 accent-black text-black rounded border-gray-300 focus:ring-black">
+                    <span class="text-sm text-gray-700">Email me with news and offers</span>
+                </label>
+            </div>
+
+            <!-- Delivery Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-black mb-3">Delivery</h2>
+                <div class="space-y-3">
+                    <select class="checkout-input bg-gray-50 text-gray-700 cursor-pointer">
+                        <option>Egypt</option>
+                    </select>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <input type="text" placeholder="First name" class="checkout-input">
+                        <input type="text" placeholder="Last name" class="checkout-input">
+                    </div>
+                    
+                    <input type="text" placeholder="Address" class="checkout-input">
+                    <input type="text" placeholder="Apartment, suite, etc. (optional)" class="checkout-input">
+                    <input type="text" placeholder="City" class="checkout-input">
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <select class="checkout-input bg-gray-50 text-gray-700 cursor-pointer">
+                            <option>Cairo</option>
+                            <option>Giza</option>
+                            <option>Alexandria</option>
+                        </select>
+                        <input type="text" placeholder="Postal code (optional)" class="checkout-input">
+                    </div>
+                    
+                    <div class="relative">
+                        <input type="tel" placeholder="Phone" class="checkout-input">
+                        <i class="ph ph-question text-gray-400 absolute right-3 top-3 text-xl"></i>
+                    </div>
+
+                    <label class="flex items-center gap-2 mt-3 cursor-pointer">
+                        <input type="checkbox" class="w-5 h-5 accent-black text-black rounded border-gray-300 focus:ring-black">
+                        <span class="text-sm text-gray-700">Save this information for next time</span>
+                    </label>
+                    <label class="flex items-center gap-2 mt-2 cursor-pointer">
+                        <input type="checkbox" class="w-5 h-5 accent-black text-black rounded border-gray-300 focus:ring-black">
+                        <span class="text-sm text-gray-700">Text me with news and offers</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Shipping Method Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-black mb-3">Shipping method</h2>
+                <div class="border border-black bg-blue-50/20 rounded-md p-4 flex justify-between items-center">
+                    <span class="text-sm font-semibold text-black">standard</span>
+                    <span class="text-sm font-bold text-black">E£85.00</span>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-black mb-1">Payment</h2>
+                <p class="text-sm text-gray-500 mb-3">All transactions are secure and encrypted.</p>
+                
+                <div class="checkout-radio-group">
+                    <!-- Option 1: Credit Card -->
+                    <label class="checkout-radio-item items-start">
+                        <input type="radio" name="payment" class="mt-1 mr-3 w-5 h-5 accent-black" onclick="togglePaymentForms('card-form')">
+                        <div class="flex-1">
+                            <div class="flex justify-between items-center w-full">
+                                <span class="text-sm font-medium">Credit card</span>
+                                <div class="flex gap-1">
+                                    <div class="w-8 h-5 bg-[#ff5f00] rounded text-white flex items-center justify-center text-[8px] font-bold italic overflow-hidden relative"><div class="w-3 h-3 bg-red-500 rounded-full absolute left-0 mix-blend-screen"></div><div class="w-3 h-3 bg-yellow-500 rounded-full absolute right-0 mix-blend-screen"></div></div>
+                                    <div class="w-8 h-5 bg-[#1434cb] rounded text-white flex items-center justify-center text-[8px] font-bold italic">VISA</div>
+                                    <div class="w-8 h-5 bg-[#0070ce] rounded text-white flex items-center justify-center text-[7px] font-bold">AMEX</div>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Form inside Credit Card (Hidden by default) -->
+                    <div id="card-form" class="hidden bg-gray-50 p-4 border-b border-gray-200 space-y-3">
+                        <div class="relative">
+                            <input type="text" placeholder="Card number" class="checkout-input">
+                            <i class="ph ph-lock-key absolute right-3 top-3 text-gray-400 text-lg"></i>
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" placeholder="Expiration date (MM / YY)" class="checkout-input">
+                            <div class="relative">
+                                <input type="text" placeholder="Security code" class="checkout-input">
+                                <i class="ph ph-question absolute right-3 top-3 text-gray-400 text-lg"></i>
+                            </div>
+                        </div>
+                        <input type="text" placeholder="Name on card" class="checkout-input">
+                        <label class="flex items-center gap-2 mt-3 cursor-pointer">
+                            <input type="checkbox" checked class="w-5 h-5 accent-black text-black rounded border-gray-300 focus:ring-black">
+                            <span class="text-sm text-gray-700">Use shipping address as billing address</span>
+                        </label>
+                    </div>
+
+                    <!-- Option 2: Pay via -->
+                    <label class="checkout-radio-item justify-between">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment" class="mr-3 w-5 h-5 accent-black" onclick="togglePaymentForms('none')">
+                            <span class="text-sm font-medium">Pay via (Debit/Credit cards/Wallets/Installments)</span>
+                        </div>
+                    </label>
+
+                    <!-- Option 3: Cards - Installments (Selected as per screenshot) -->
+                    <label class="checkout-radio-item justify-between active">
+                        <div class="flex items-center">
+                            <input type="radio" name="payment" checked class="mr-3 w-5 h-5 accent-black" onclick="togglePaymentForms('redirect-msg')">
+                            <span class="text-sm font-medium">Cards - Installments - Wallets</span>
+                        </div>
+                        <div class="flex gap-1">
+                            <div class="w-8 h-5 bg-[#1434cb] rounded text-white flex items-center justify-center text-[8px] font-bold italic">VISA</div>
+                            <div class="w-8 h-5 bg-[#ff5f00] rounded text-white flex items-center justify-center text-[8px] font-bold italic overflow-hidden relative"><div class="w-3 h-3 bg-red-500 rounded-full absolute left-0 mix-blend-screen"></div><div class="w-3 h-3 bg-yellow-500 rounded-full absolute right-0 mix-blend-screen"></div></div>
+                            <div class="w-8 h-5 bg-purple-700 rounded text-white flex items-center justify-center text-[8px] font-bold">MEEZA</div>
+                        </div>
+                    </label>
+                    <!-- Redirect Message -->
+                    <div id="redirect-msg" class="block bg-gray-50 p-6 border-b border-gray-200 text-center text-sm text-gray-700">
+                        <svg class="w-10 h-10 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        You'll be redirected to Cards - Installments - Wallets to complete your purchase.
+                    </div>
+
+                    <!-- Option 4: COD -->
+                    <label class="checkout-radio-item">
+                        <input type="radio" name="payment" class="mr-3 w-5 h-5 accent-black" onclick="togglePaymentForms('none')">
+                        <span class="text-sm font-medium">Cash on Delivery (COD)</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Billing Address Section (Based on screenshot) -->
+            <div class="mb-8">
+                <h2 class="text-xl font-bold text-black mb-3">Billing address</h2>
+                <div class="checkout-radio-group">
+                    <label class="checkout-radio-item active">
+                        <input type="radio" name="billing" checked class="mr-3 w-5 h-5 accent-black">
+                        <span class="text-sm font-medium">Same as shipping address</span>
+                    </label>
+                    <label class="checkout-radio-item">
+                        <input type="radio" name="billing" class="mr-3 w-5 h-5 accent-black">
+                        <span class="text-sm font-medium">Use a different billing address</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Pay Now Bottom Area -->
+            <div class="mt-8 border-t border-gray-200 pt-6">
+                <div class="flex items-center gap-3 mb-6">
+                    <img id="checkout-bottom-img" src="" class="w-12 h-12 object-cover border border-gray-200 rounded mix-blend-multiply" alt="Product">
+                    <div class="flex-1 flex justify-between items-center">
+                        <span class="text-lg font-bold text-black">Total</span>
+                        <div class="text-black">
+                            <span class="text-xs text-gray-500 font-normal mr-1">EGP</span>
+                            <span id="checkout-pay-total" class="text-xl font-bold">E£0.00</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full bg-black text-white rounded-lg py-4 font-bold text-lg hover:bg-gray-800 transition shadow-lg">
+                    Pay now
+                </button>
+            </div>
+
+            <!-- Footer Links Checkout -->
+            <div class="mt-8 pt-4 border-t border-gray-200 flex flex-wrap gap-4 text-xs text-gray-500 font-medium pb-10">
+                <a href="#" class="hover:underline hover:text-black">Refund policy</a>
+                <a href="#" class="hover:underline hover:text-black">Shipping</a>
+                <a href="#" class="hover:underline hover:text-black">Privacy policy</a>
+                <a href="#" class="hover:underline hover:text-black">Terms of service</a>
+                <a href="#" class="hover:underline hover:text-black">Contact</a>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Sticky Bottom Bar (Product Page) -->
+    <div id="sticky-cart-bar" class="hidden fixed bottom-0 left-0 w-full bg-[#E0E0E0] border-t border-gray-300 p-3 justify-between items-center z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <div class="flex items-center gap-3">
+            <img id="sticky-product-image" src="" class="w-10 h-10 object-cover mix-blend-multiply border border-gray-300 bg-white" alt="Thumb">
+            <div>
+                <p id="sticky-product-title" class="text-sm font-bold uppercase leading-tight">Product Name</p>
+                <p class="text-[11px] font-semibold text-gray-600">S</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <span id="sticky-product-price" class="text-sm font-bold uppercase">LE 0.00</span>
+            <button onclick="goToCheckout()" class="bg-black text-white w-10 h-10 flex items-center justify-center hover:bg-gray-800 transition">
+                <i class="ph ph-bag-simple text-xl"></i><span class="text-xs font-bold -ml-1">+</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer id="global-footer" class="w-full bg-black text-white pt-16 pb-6 px-6 text-center sm:text-left mt-auto z-10 relative">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 mb-12">
+            <div>
+                <h3 class="logo-font text-lg font-bold uppercase tracking-widest mb-4">LIZTR ESSENS</h3>
+                <p class="text-sm text-gray-400 font-medium leading-relaxed max-w-xs mx-auto sm:mx-0">How the streets rock Essens. Premium streetwear for the lost era.</p>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-widest mb-4">Quick Links</h4>
+                <ul class="text-sm text-gray-400 space-y-3 font-medium">
+                    <li><a href="#" class="hover:text-white transition">Shop All</a></li>
+                    <li><a href="#" class="hover:text-white transition">New Arrivals</a></li>
+                    <li><a href="#" class="hover:text-white transition">Lookbook</a></li>
+                    <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-widest mb-4">Follow The Cult</h4>
+                <div class="flex justify-center sm:justify-start gap-5">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="ph ph-instagram-logo text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="ph ph-tiktok-logo text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="ph ph-facebook-logo text-2xl"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-6 flex flex-col items-center justify-center text-[11px] sm:text-xs text-gray-500 font-bold tracking-widest uppercase">
+            <p class="mb-2">© 2026 LIZTR ESSENS. ALL RIGHTS RESERVED.</p>
+            <p class="text-white">Developed by VORTX DEV</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // متغيرات عامة لحفظ بيانات المنتج الحالي
+        let globalProductName = '';
+        let globalProductPrice = 0;
+        let globalProductImg = '';
+
+        // الدالة لفتح صفحة المنتج وتحديث البيانات
+        function openProduct(name, currentPriceStr, oldPriceStr, imgUrl) {
+            globalProductName = name;
+            globalProductPrice = parseInt(currentPriceStr);
+            globalProductImg = imgUrl;
+
+            document.getElementById('main-product-title').textContent = name;
+            document.getElementById('main-product-price').textContent = currentPriceStr + ' L.E';
+            document.getElementById('main-product-old-price').textContent = oldPriceStr + ' L.E';
+            document.getElementById('main-product-image').src = imgUrl;
+
+            document.getElementById('sticky-product-title').textContent = name;
+            document.getElementById('sticky-product-price').textContent = 'LE ' + currentPriceStr + '.00';
+            document.getElementById('sticky-product-image').src = imgUrl;
+
+            showPage('product-page');
+        }
+
+        // الدالة للانتقال لصفحة الدفع (Checkout)
+        function goToCheckout() {
+            // تحديث بيانات الدفع
+            const shippingCost = 85;
+            const totalCost = globalProductPrice + shippingCost;
+
+            // تحديث واجهة المستخدم في صفحة الدفع
+            document.getElementById('checkout-name').textContent = globalProductName;
+            document.getElementById('checkout-img').src = globalProductImg;
+            document.getElementById('checkout-bottom-img').src = globalProductImg;
+            
+            document.getElementById('checkout-item-price').textContent = `E£${globalProductPrice.toFixed(2)}`;
+            document.getElementById('checkout-subtotal').textContent = `E£${globalProductPrice.toFixed(2)}`;
+            
+            const totalFormatted = `E£${totalCost.toFixed(2)}`;
+            document.getElementById('checkout-header-total').textContent = totalFormatted;
+            document.getElementById('checkout-final-total').textContent = totalFormatted;
+            document.getElementById('checkout-pay-total').textContent = totalFormatted;
+
+            showPage('checkout-page');
+        }
+
+        // التنقل بين الصفحات
+        function showPage(pageId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // إخفاء كل شيء
+            document.getElementById('home-page').classList.replace('block', 'hidden');
+            document.getElementById('product-page').classList.replace('block', 'hidden');
+            document.getElementById('checkout-page').classList.replace('block', 'hidden');
+            
+            // إظهار الصفحة المستهدفة
+            document.getElementById(pageId).classList.replace('hidden', 'block');
+            
+            // التحكم في الشريط السفلي والفوتر الرئيسي
+            const stickyBar = document.getElementById('sticky-cart-bar');
+            const globalFooter = document.getElementById('global-footer');
+
+            if(pageId === 'product-page') {
+                stickyBar.classList.replace('hidden', 'flex');
+                globalFooter.classList.replace('hidden', 'block');
+            } else if (pageId === 'checkout-page') {
+                stickyBar.classList.replace('flex', 'hidden');
+                globalFooter.classList.replace('block', 'hidden'); // الفوتر يختفي في صفحة الدفع
+            } else {
+                stickyBar.classList.replace('flex', 'hidden');
+                globalFooter.classList.replace('hidden', 'block');
+            }
+        }
+
+        // تبديل نماذج الدفع في Checkout
+        function togglePaymentForms(formIdToShow) {
+            // إخفاء جميع النماذج الفرعية
+            document.getElementById('card-form').classList.replace('block', 'hidden');
+            document.getElementById('redirect-msg').classList.replace('block', 'hidden');
+
+            // إزالة الكلاس active من كل الخيارات
+            const labels = document.querySelectorAll('.checkout-radio-item');
+            labels.forEach(l => l.classList.remove('active'));
+
+            // إظهار النموذج المطلوب وتنشيط الخلفية للـ label
+            if(formIdToShow !== 'none') {
+                const targetForm = document.getElementById(formIdToShow);
+                if(targetForm) targetForm.classList.replace('hidden', 'block');
+            }
+            
+            // تفعيل لون الخلفية للـ Label الذي تم اختياره
+            setTimeout(() => {
+                const checkedRadio = document.querySelector('input[name="payment"]:checked');
+                if(checkedRadio) checkedRadio.closest('.checkout-radio-item').classList.add('active');
+            }, 10);
+        }
+
+        // Accordion
+        function toggleAccordion(contentId, iconId) {
+            const content = document.getElementById(contentId);
+            const icon = document.getElementById(iconId);
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                if(icon) icon.style.transform = "rotate(180deg)"; // أو تغيير الأيقونة حسب نوعها
+                if(icon.textContent === '−') icon.textContent = '+';
+            } else {
+                content.classList.add('open');
+                if(icon) icon.style.transform = "rotate(0deg)";
+                if(icon.textContent === '+') icon.textContent = '−';
+            }
+        }
+
+        // أكواد المنتجات التفاعلية (Home Page)
+        const camoVariants = {
+            'dark': { name: 'DARK OLIVE 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787453476/2_20260823_055048_0001_wfsfjm.png' },
+            'gray': { name: 'GRAY CAMO 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787453486/1_20260823_055048_0000_lb2mne.png' }
+        };
+
+        const solidVariants = {
+            'olive': { name: 'OLIVE 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455932/3_20260823_063129_0000_ulofbv.png' },
+            'wine': { name: 'RED WINE 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455946/4_20260823_063129_0001_flasoy.png' },
+            'black': { name: 'BLACK 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455947/5_20260823_063129_0002_cpattq.png' },
+            'white': { name: 'WHITE 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455934/6_20260823_063129_0003_pzftch.png' }
+        };
+
+        let camoTimeout, solidTimeout;
+
+        function changeCamoVariant(color) { updateVariant('camo', color, camoVariants); }
+        function changeSolidVariant(color) { updateVariant('solid', color, solidVariants); }
+
+        function updateVariant(section, color, variantsObj) {
+            const imgEl = document.getElementById(`interactive-img-${section}`);
+            const nameEl = document.getElementById(`interactive-name-${section}`);
+            
+            if(section === 'camo') clearTimeout(camoTimeout);
+            if(section === 'solid') clearTimeout(solidTimeout);
+            
+            imgEl.style.opacity = '0';
+            nameEl.style.opacity = '0';
+            
+            const keys = Object.keys(variantsObj);
+            keys.forEach(c => {
+                const btn = document.getElementById(`swatch-${section}-${c}`);
+                if(c === color) {
+                    btn.classList.add('ring-2', 'ring-black', 'border-black');
+                    btn.classList.replace('border-gray-400', 'border-black');
+                    btn.classList.add('border-2');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-black', 'border-black', 'border-2');
+                    btn.classList.add('border-gray-400');
+                }
+            });
+
+            const timeoutId = setTimeout(() => {
+                imgEl.src = variantsObj[color].img;
+                nameEl.textContent = variantsObj[color].name;
+                imgEl.style.opacity = '1';
+                nameEl.style.opacity = '1';
+            }, 300);
+
+            if(section === 'camo') camoTimeout = timeoutId;
+            if(section === 'solid') solidTimeout = timeoutId;
+        }
+
+        // Slider
+        const slider = document.getElementById('product-slider');
+        let isDown = false, startX, scrollLeft, autoPlayInterval;
+
+        function startAutoScroll() {
+            stopAutoScroll();
+            if(!slider) return;
+            autoPlayInterval = setInterval(() => {
+                const maxScroll = slider.scrollWidth - slider.clientWidth;
+                if (slider.scrollLeft >= maxScroll - 5) {
+                    slider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    const cardWidth = slider.querySelector('.slider-item').offsetWidth;
+                    slider.scrollBy({ left: cardWidth + 24, behavior: 'smooth' }); 
+                }
+            }, 3000); 
+        }
+
+        function stopAutoScroll() { clearInterval(autoPlayInterval); }
+
+        if(slider) {
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('cursor-grabbing');
+                slider.classList.remove('cursor-grab');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+                stopAutoScroll(); 
+            });
+            slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('cursor-grabbing'); slider.classList.add('cursor-grab'); startAutoScroll(); });
+            slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('cursor-grabbing'); slider.classList.add('cursor-grab'); startAutoScroll(); });
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 1.5; 
+                slider.scrollLeft = scrollLeft - walk;
+            });
+            slider.addEventListener('touchstart', stopAutoScroll, {passive: true});
+            slider.addEventListener('touchend', startAutoScroll, {passive: true});
+            startAutoScroll();
+        }
+    </script>
+</body>
+</html>
