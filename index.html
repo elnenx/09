@@ -13,10 +13,10 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
-
+    
     <!-- Supabase JS Client -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -60,6 +60,7 @@
             opacity: 1;
         }
 
+        /* تنسيقات خاصة بصفحة الدفع (Checkout) */
         .checkout-input {
             width: 100%;
             border: 1px solid #d1d5db;
@@ -100,7 +101,7 @@
 
     <!-- Global Header -->
     <header class="bg-black text-white flex justify-between items-center px-4 py-4 sm:px-6 z-50 sticky top-0 shadow-md">
-        <button onclick="showPage('home-page')" class="text-white focus:outline-none hover:text-gray-300 transition" aria-label="Menu">
+        <button class="text-white focus:outline-none hover:text-gray-300 transition" aria-label="Menu">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M4 8h16M4 16h16"/>
             </svg>
@@ -114,7 +115,7 @@
             <button class="text-white focus:outline-none hover:text-gray-300 transition" aria-label="Account">
                 <i class="ph ph-user text-[22px]"></i>
             </button>
-            <button onclick="goToCheckout()" class="text-white focus:outline-none hover:text-gray-300 transition relative" aria-label="Cart">
+            <button class="text-white focus:outline-none hover:text-gray-300 transition" aria-label="Cart">
                 <i class="ph ph-bag text-[22px]"></i>
             </button>
         </div>
@@ -130,18 +131,18 @@
             <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
             <div class="absolute bottom-8 left-5 sm:left-8 z-10">
                 <h1 class="text-white text-[32px] sm:text-5xl font-bold tracking-tight mb-4">LOST ERA (SS26)</h1>
-                <a href="#new-arrivals-sec" class="inline-block border border-white text-white px-8 py-3 text-[13px] font-bold uppercase tracking-wide hover:bg-white hover:text-black transition-colors duration-300">SHOP NOW</a>
+                <a href="#" class="inline-block border border-white text-white px-8 py-3 text-[13px] font-bold uppercase tracking-wide hover:bg-white hover:text-black transition-colors duration-300">SHOP NOW</a>
             </div>
         </section>
 
         <!-- NEW ARRIVALS -->
-        <section id="new-arrivals-sec" class="w-full px-5 pt-12 pb-4 flex justify-between items-end bg-[#E0E0E0] text-black">
+        <section class="w-full px-5 pt-12 pb-4 flex justify-between items-end bg-[#E0E0E0] text-black">
             <h2 class="text-[20px] sm:text-[26px] font-bold tracking-tight uppercase">NEW ARRIVALS</h2>
-            <a href="#solid-sec" class="text-[14px] sm:text-base font-semibold pb-1 hover:underline">View all</a>
+            <a href="#" class="text-[14px] sm:text-base font-semibold pb-1 hover:underline">View all</a>
         </section>
 
         <section class="w-full px-5 pb-8 bg-[#E0E0E0]">
-            <div id="new-arrivals-grid" class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
+            <div class="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
                 <a onclick="openProduct('DARK OLIVE 09 JRSY', '790', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787450019/1_3a9e03c1-ce69-4e3b-b921-337b1b4e8a91_fnryux.png')" class="flex flex-col group cursor-pointer">
                     <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm">
                         <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787450019/1_3a9e03c1-ce69-4e3b-b921-337b1b4e8a91_fnryux.png" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -186,7 +187,7 @@
         </section>
 
         <!-- SOLID COLLECTION (Slider) -->
-        <section id="solid-sec" class="w-full pt-12 pb-12 bg-[#E0E0E0] border-t border-gray-300">
+        <section class="w-full pt-12 pb-12 bg-[#E0E0E0] border-t border-gray-300">
             <div class="px-5 mb-8 flex justify-between items-end">
                 <h2 class="text-[20px] sm:text-[26px] font-bold tracking-tight uppercase text-black">SOLID COLLECTION</h2>
             </div>
@@ -233,14 +234,103 @@
                 </div>
             </div>
         </section>
+
+        <!-- SOLID LOOKBOOK -->
+        <section class="w-full px-5 pt-8 pb-4 flex justify-between items-end bg-[#E0E0E0] text-black border-t border-gray-300">
+            <h2 class="text-[20px] sm:text-[26px] font-bold tracking-tight uppercase">SOLID SERIES LOOKBOOK</h2>
+        </section>
+
+        <section class="relative w-full h-[85vh] min-h-[600px] bg-[#E0E0E0] overflow-hidden">
+            <img id="interactive-img-solid" src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455932/3_20260823_063129_0000_ulofbv.png" alt="Solid Outfit" class="absolute inset-0 w-full h-full object-cover object-top sm:object-center mix-blend-multiply fade-transition z-0">
+            <div class="absolute left-4 sm:left-12 top-1/2 -translate-y-1/2 z-10 flex flex-row items-center gap-3 sm:gap-5 pointer-events-none">
+                <h2 id="interactive-name-solid" class="text-xl sm:text-3xl font-black uppercase tracking-[0.2em] text-black [writing-mode:vertical-rl] rotate-180 fade-transition logo-font whitespace-nowrap drop-shadow-md">OLIVE 09 JRSY</h2>
+                <div class="flex flex-row items-center gap-2 sm:gap-4 [writing-mode:vertical-rl] rotate-180 whitespace-nowrap drop-shadow-md">
+                    <span class="text-base sm:text-xl font-bold text-black">690 L.E</span>
+                    <span class="text-xs sm:text-sm font-medium text-gray-600 line-through">850 L.E</span>
+                </div>
+            </div>
+            <div class="absolute right-4 sm:right-12 top-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center gap-5 sm:gap-6">
+                <button onclick="changeSolidVariant('olive')" id="swatch-solid-olive" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-black ring-2 ring-offset-2 ring-black ring-offset-[#E0E0E0] bg-[#3B4138] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+                <button onclick="changeSolidVariant('wine')" id="swatch-solid-wine" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-400 ring-offset-2 ring-offset-[#E0E0E0] bg-[#4a1c22] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+                <button onclick="changeSolidVariant('black')" id="swatch-solid-black" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-400 ring-offset-2 ring-offset-[#E0E0E0] bg-[#1a1a1a] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+                <button onclick="changeSolidVariant('white')" id="swatch-solid-white" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-gray-400 ring-offset-2 ring-offset-[#E0E0E0] bg-[#fdfdfd] shadow-lg transition-transform hover:scale-110 focus:outline-none"></button>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section class="w-full py-20 bg-[#E0E0E0] border-t border-gray-300 flex flex-col items-center justify-center text-center px-6">
+            <p class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-1 text-black">What cult says</p>
+            <h2 class="text-4xl sm:text-5xl font-black uppercase tracking-tighter mb-2 text-black">TESTIMONIALS</h2>
+            <p class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-10 text-black">6835+ CUSTOMERS</p>
+
+            <div class="flex gap-1.5 mb-8 text-black">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            </div>
+
+            <p class="text-lg sm:text-2xl md:text-3xl font-medium uppercase leading-[1.4] max-w-3xl mb-8 text-black tracking-tight">
+                YOU CAN FEEL THE QUALITY AS SOON AS YOU HOLD IT. THE MESH AND PRINT BOTH FEEL PREMIUM AND THE FIT IS PROPERLY RELAXED.
+            </p>
+
+            <p class="text-sm sm:text-base font-bold uppercase tracking-widest mb-1 text-black">AHMED NADER</p>
+            <p class="text-[11px] sm:text-xs text-gray-500 font-bold uppercase tracking-widest mb-12">PURCHASED: OLIVE 09 JRSY</p>
+
+            <div class="w-full max-w-md h-[1px] bg-gray-400 relative">
+                <div class="absolute left-0 top-0 h-[2px] bg-black w-1/4 -mt-[0.5px]"></div>
+            </div>
+        </section>
+
+        <!-- HOW TO WEAR -->
+        <section class="w-full pt-16 pb-20 bg-[#E0E0E0] border-t border-gray-300">
+            <div class="px-5 mb-8">
+                <p class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase mb-1 text-black">FROM THE CULT.</p>
+                <h2 class="text-4xl sm:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-2 text-black w-3/4 sm:w-full">
+                    HOW TO WEAR LIZTR ESSENS
+                </h2>
+                <p class="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-black">HOW THE STREETS ROCK ESSENS.</p>
+            </div>
+            
+            <div class="flex gap-4 sm:gap-6 px-5 overflow-x-auto hide-scrollbar snap-x snap-mandatory pb-4">
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-black snap-center rounded-sm overflow-hidden shadow-sm">
+                    <video src="https://res.cloudinary.com/dyhlzplzb/video/upload/v1787456629/53cbd7eb08a446d88779496536f32cc3.HD-720p-1.6Mbps-91133629_jt9mgf.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-gray-300 snap-center rounded-sm overflow-hidden shadow-sm">
+                    <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787456632/8_ee23580e-a8ce-4437-97a0-8797815b05c0_y05deg.png" alt="Streetwear Style" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-gray-300 snap-center rounded-sm overflow-hidden shadow-sm">
+                    <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787456634/7_407866ce-6e8e-4cd9-86aa-44793a330a17_ythby4.jpg" alt="Streetwear Style" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-black snap-center rounded-sm overflow-hidden shadow-sm">
+                    <video src="https://res.cloudinary.com/dyhlzplzb/video/upload/v1787456642/c5538cf250df4e65bab0f09e4d8a7ca3.HD-1080p-3.3Mbps-91131224_pmulas.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-black snap-center rounded-sm overflow-hidden shadow-sm">
+                    <video src="https://res.cloudinary.com/dyhlzplzb/video/upload/v1787456636/c149ce285a28457db2301dee06ae9784.HD-720p-1.6Mbps-91131223_q0m3ru.mp4" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+                </div>
+                <div class="flex-none w-[80%] sm:w-[45%] md:w-[32%] aspect-[3/4] bg-gray-300 snap-center rounded-sm overflow-hidden shadow-sm">
+                    <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787456633/9_5053471e-c722-48d3-87fa-c8fb22451a85_gxldex.png" alt="Streetwear Style" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
     </div>
+
 
     <!-- ==========================================
          2. صفحة تفاصيل المنتج (PRODUCT PAGE)
          ========================================== -->
     <div id="product-page" class="hidden w-full bg-[#E0E0E0] pb-24">
+        
         <div class="w-full bg-[#E0E0E0] relative flex justify-center py-6">
             <img id="main-product-image" src="" class="w-full max-w-2xl object-cover mix-blend-multiply" alt="Product Image">
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                <div class="w-2 h-2 rounded-full bg-black"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+            </div>
         </div>
 
         <div class="w-full border-t border-b border-gray-300 py-3 text-center">
@@ -255,46 +345,133 @@
                 <span id="main-product-old-price" class="text-sm font-medium text-gray-500 line-through">LE 850.00</span>
             </div>
 
-            <!-- اختيار المقاس -->
             <div class="mb-8">
-                <p class="text-sm font-bold text-black mb-3">Size: <span id="selected-size-label" class="font-normal">S</span></p>
-                <div id="size-buttons-container" class="flex flex-wrap gap-2 sm:gap-3">
-                    <button type="button" class="w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 flex items-center justify-center font-semibold text-sm out-of-stock">XS</button>
-                    <button type="button" onclick="selectSize('S', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-black bg-[#E0E0E0] text-black flex items-center justify-center font-semibold text-sm ring-1 ring-black">S</button>
-                    <button type="button" onclick="selectSize('M', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">M</button>
-                    <button type="button" onclick="selectSize('L', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">L</button>
-                    <button type="button" onclick="selectSize('XL', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">XL</button>
-                    <button type="button" onclick="selectSize('2XL', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">2XL</button>
+                <p class="text-sm font-bold text-black mb-3">Size <span id="selected-size-label" class="font-normal"></span></p>
+                <div class="flex flex-wrap gap-2 sm:gap-3">
+                    <button class="w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 flex items-center justify-center font-semibold text-sm out-of-stock">XS</button>
+                    <button onclick="selectSize('S', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-black bg-[#E0E0E0] text-black flex items-center justify-center font-semibold text-sm ring-1 ring-black">S</button>
+                    <button onclick="selectSize('M', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">M</button>
+                    <button onclick="selectSize('L', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">L</button>
+                    <button onclick="selectSize('XL', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">XL</button>
+                    <button onclick="selectSize('2XL', this)" class="size-btn w-12 h-12 sm:w-14 sm:h-14 border border-gray-300 bg-white/50 text-black flex items-center justify-center font-semibold text-sm hover:border-black transition">2XL</button>
                 </div>
             </div>
 
-            <!-- الكمية -->
             <div class="flex gap-3 mb-3">
                 <div class="flex items-center justify-between border border-black px-4 py-3 w-32 bg-transparent">
-                    <button type="button" onclick="changeQty(-1)" class="text-lg font-light focus:outline-none">−</button>
+                    <button onclick="changeQty(-1)" class="text-lg font-light focus:outline-none">−</button>
                     <span id="product-qty" class="font-semibold text-sm">1</span>
-                    <button type="button" onclick="changeQty(1)" class="text-lg font-light focus:outline-none">+</button>
+                    <button onclick="changeQty(1)" class="text-lg font-light focus:outline-none">+</button>
                 </div>
-                <button type="button" onclick="goToCheckout()" class="flex-1 border border-black flex items-center justify-center gap-2 font-bold text-sm uppercase tracking-wider hover:bg-black hover:text-white transition">
+                <button onclick="goToCheckout()" class="flex-1 border border-black flex items-center justify-center gap-2 font-bold text-sm uppercase tracking-wider hover:bg-black hover:text-white transition">
                     <i class="ph ph-tote"></i> ADD TO CART
                 </button>
             </div>
-
-            <button type="button" onclick="goToCheckout()" class="w-full bg-black text-white py-4 font-bold text-sm uppercase tracking-wider mb-6 hover:bg-gray-800 transition">
+            
+            <button onclick="goToCheckout()" class="w-full bg-black text-white py-4 font-bold text-sm uppercase tracking-wider mb-6 hover:bg-gray-800 transition">
                 BUY IT NOW
             </button>
+
+            <div class="flex justify-center gap-3 mb-10">
+                <div class="bg-blue-700 text-white font-bold italic px-2 py-1 rounded text-xs">VISA</div>
+                <div class="bg-black flex items-center justify-center w-10 h-6 rounded relative overflow-hidden">
+                    <div class="w-4 h-4 bg-red-500 rounded-full absolute left-1 mix-blend-screen"></div>
+                    <div class="w-4 h-4 bg-yellow-500 rounded-full absolute right-1 mix-blend-screen"></div>
+                </div>
+            </div>
+
+            <div class="space-y-4 mb-10 border-t border-gray-300 pt-6">
+                <div class="flex items-center gap-4 text-black">
+                    <i class="ph ph-truck text-2xl"></i>
+                    <p class="text-sm font-bold">Estimated Delivery: <span class="font-medium">3-7 Days</span></p>
+                </div>
+                <div class="flex items-center gap-4 text-black">
+                    <i class="ph ph-arrows-clockwise text-2xl"></i>
+                    <p class="text-sm font-bold">Easy Returns & Exchanges</p>
+                </div>
+                <div class="flex items-center gap-4 text-black">
+                    <i class="ph ph-lock-key text-2xl"></i>
+                    <p class="text-sm font-bold">Secure Payment</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-300">
+                <div class="border-b border-gray-300 py-4">
+                    <button onclick="toggleAccordion('acc-size', 'icon-size')" class="flex justify-between items-center w-full text-left font-bold uppercase text-sm tracking-wide text-gray-700 focus:outline-none">
+                        SIZE & FIT
+                        <span id="icon-size" class="text-xl font-light text-black">−</span>
+                    </button>
+                    <div id="acc-size" class="accordion-content open mt-4 text-sm text-black">
+                        <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787457324/BLACK_JERSEY_9fd03de2-4ffe-4094-8f3d-e51b91b4cc45_qjuplo.png" alt="Size Chart" class="w-full mb-6 mix-blend-multiply">
+                        <p class="font-bold mb-1 text-base">Model height 184 cm</p>
+                        <p class="font-bold mb-5 text-base">Wearing size M size (for styling only!)</p>
+                        <p class="font-bold text-base">Measurements may vary by ±1 cm due to manufacturing tolerance.</p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-300 py-4">
+                    <button onclick="toggleAccordion('acc-details', 'icon-details')" class="flex justify-between items-center w-full text-left font-bold uppercase text-sm tracking-wide text-gray-700 focus:outline-none">
+                        PRODUCT DETAILS
+                        <span id="icon-details" class="text-xl font-light text-black">+</span>
+                    </button>
+                    <div id="acc-details" class="accordion-content mt-4 text-base text-black space-y-3 font-medium">
+                        <p>Silkscreen+ Halftone Print</p>
+                        <p>Relaxed/ Cropped Fit.</p>
+                        <p>Relaxed Arm Cuff.</p>
+                        <p>Custom Mesh material.</p>
+                    </div>
+                </div>
+
+                <div class="border-b border-gray-300 py-4">
+                    <button onclick="toggleAccordion('acc-care', 'icon-care')" class="flex justify-between items-center w-full text-left font-bold uppercase text-sm tracking-wide text-gray-700 focus:outline-none">
+                        CARE & MAINTENANCE
+                        <span id="icon-care" class="text-xl font-light text-black">+</span>
+                    </button>
+                    <div id="acc-care" class="accordion-content mt-4 text-base text-black space-y-2 font-medium">
+                        <p>Wash inside out on a cold gentle cycle.</p>
+                        <p>Do not iron directly on the print.</p>
+                        <p>Do not tumble dry.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <h3 class="text-2xl font-black uppercase tracking-tight mb-6">RELATED ITEMS</h3>
+                <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4">
+                    <a onclick="openProduct('WHITE 09 JRSY', '690', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455934/6_20260823_063129_0003_pzftch.png')" class="flex-none w-[45%] flex flex-col group cursor-pointer">
+                        <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm">
+                            <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455934/6_20260823_063129_0003_pzftch.png" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-[12px] font-bold text-black uppercase truncate">WHITE 09 JRSY</h3>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="text-[13px] font-bold text-black">690 L.E</span>
+                        </div>
+                    </a>
+                    <a onclick="openProduct('OLIVE 09 JRSY', '690', '850', 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455932/3_20260823_063129_0000_ulofbv.png')" class="flex-none w-[45%] flex flex-col group cursor-pointer">
+                        <div class="relative w-full aspect-[3/4] mb-3 overflow-hidden bg-white shadow-sm">
+                            <img src="https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455932/3_20260823_063129_0000_ulofbv.png" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="text-[12px] font-bold text-black uppercase truncate">OLIVE 09 JRSY</h3>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="text-[13px] font-bold text-black">690 L.E</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </div>
 
+
     <!-- ==========================================
-         3. صفحة الدفع (CHECKOUT PAGE - DIRECT DATABASE SAVE)
+         3. صفحة الدفع (CHECKOUT PAGE) - المربوطة بـ Supabase
          ========================================== -->
     <div id="checkout-page" class="hidden w-full bg-[#f5f5f5] min-h-screen text-[#333333]">
         <div class="max-w-2xl mx-auto p-4 sm:p-6 bg-white sm:mt-6 sm:mb-12 sm:rounded-lg sm:shadow-sm">
             
             <!-- Order Summary Section -->
             <div class="border-b border-gray-200 pb-5 mb-6">
-                <button type="button" onclick="toggleAccordion('checkout-summary', 'checkout-icon')" class="w-full flex justify-between items-center py-2 focus:outline-none">
+                <button onclick="toggleAccordion('checkout-summary', 'checkout-icon')" class="w-full flex justify-between items-center py-2 focus:outline-none">
                     <span class="text-sm text-gray-700 flex items-center gap-2">Order summary <i id="checkout-icon" class="ph ph-caret-up"></i></span>
                     <span id="checkout-header-total" class="font-bold text-black text-lg">E£0.00</span>
                 </button>
@@ -314,13 +491,18 @@
                         <span id="checkout-item-price" class="text-sm font-medium text-black">E£0.00</span>
                     </div>
 
+                    <div class="flex gap-2 mb-4">
+                        <input type="text" placeholder="Discount code or gift card" class="checkout-input flex-1">
+                        <button type="button" class="bg-gray-200 text-gray-400 font-semibold px-4 py-3 rounded-md text-sm cursor-not-allowed">Apply</button>
+                    </div>
+
                     <div class="space-y-2 text-sm text-gray-600">
                         <div class="flex justify-between">
                             <span>Subtotal</span>
                             <span id="checkout-subtotal" class="font-medium text-black">E£0.00</span>
                         </div>
                         <div class="flex justify-between">
-                            <span>Shipping</span>
+                            <span>Shipping <i class="ph ph-question text-gray-400 ml-1"></i></span>
                             <span class="font-medium text-black">E£85.00</span>
                         </div>
                     </div>
@@ -335,38 +517,69 @@
                 </div>
             </div>
 
-            <!-- Checkout Form (Connected directly to Supabase) -->
-            <form id="checkout-form" onsubmit="submitOrderToDatabase(event)">
+            <!-- حاوية نموذج الدفع -->
+            <div id="checkout-form-container">
                 <!-- Contact Section -->
                 <div class="mb-8">
-                    <h2 class="text-xl font-bold text-black mb-3">Contact</h2>
-                    <input id="cust-email" type="email" required placeholder="Email address" class="checkout-input">
+                    <div class="flex justify-between items-center mb-3">
+                        <h2 class="text-xl font-bold text-black">Contact</h2>
+                        <a href="#" class="text-sm text-blue-600 hover:underline">Sign in</a>
+                    </div>
+                    <div class="relative">
+                        <input type="email" id="cust-email" placeholder="Email" class="checkout-input">
+                        <i class="ph ph-question text-gray-400 absolute right-3 top-3 text-xl"></i>
+                    </div>
+                    <label class="flex items-center gap-2 mt-3 cursor-pointer">
+                        <input type="checkbox" checked class="w-5 h-5 accent-black text-black rounded border-gray-300 focus:ring-black">
+                        <span class="text-sm text-gray-700">Email me with news and offers</span>
+                    </label>
                 </div>
 
                 <!-- Delivery Section -->
                 <div class="mb-8">
                     <h2 class="text-xl font-bold text-black mb-3">Delivery</h2>
                     <div class="space-y-3">
+                        <select id="cust-country" class="checkout-input bg-gray-50 text-gray-700 cursor-pointer">
+                            <option>Egypt</option>
+                        </select>
+                        
                         <div class="grid grid-cols-2 gap-3">
-                            <input id="cust-fname" type="text" required placeholder="First name" class="checkout-input">
-                            <input id="cust-lname" type="text" required placeholder="Last name" class="checkout-input">
+                            <input type="text" id="cust-fname" placeholder="First name" class="checkout-input">
+                            <input type="text" id="cust-lname" placeholder="Last name" class="checkout-input">
                         </div>
                         
-                        <input id="cust-address" type="text" required placeholder="Detailed Address (Street, Building)" class="checkout-input">
-                        <input id="cust-apt" type="text" placeholder="Apartment, suite, etc. (optional)" class="checkout-input">
+                        <input type="text" id="cust-address" placeholder="Address" class="checkout-input">
+                        <input type="text" id="cust-apt" placeholder="Apartment, suite, etc. (optional)" class="checkout-input">
+                        <input type="text" id="cust-city" placeholder="City" class="checkout-input">
                         
                         <div class="grid grid-cols-2 gap-3">
-                            <input id="cust-city" type="text" required placeholder="City / Area" class="checkout-input">
                             <select id="cust-gov" class="checkout-input bg-gray-50 text-gray-700 cursor-pointer">
                                 <option value="Cairo">Cairo</option>
                                 <option value="Giza">Giza</option>
                                 <option value="Alexandria">Alexandria</option>
-                                <option value="Fayoum">Fayoum</option>
-                                <option value="Other">Other Governorate</option>
+                                <option value="Other">Other</option>
                             </select>
+                            <input type="text" placeholder="Postal code (optional)" class="checkout-input">
                         </div>
                         
-                        <input id="cust-phone" type="tel" required placeholder="Phone number (e.g. 010...)" class="checkout-input">
+                        <div class="relative">
+                            <input type="tel" id="cust-phone" placeholder="Phone" class="checkout-input">
+                            <i class="ph ph-question text-gray-400 absolute right-3 top-3 text-xl"></i>
+                        </div>
+
+                        <label class="flex items-center gap-2 mt-3 cursor-pointer">
+                            <input type="checkbox" class="w-5 h-5 accent-black text-black rounded border-gray-300 focus:ring-black">
+                            <span class="text-sm text-gray-700">Save this information for next time</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Shipping Method Section -->
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold text-black mb-3">Shipping method</h2>
+                    <div class="border border-black bg-blue-50/20 rounded-md p-4 flex justify-between items-center">
+                        <span class="text-sm font-semibold text-black">standard</span>
+                        <span class="text-sm font-bold text-black">E£85.00</span>
                     </div>
                 </div>
 
@@ -376,32 +589,67 @@
                     <p class="text-sm text-gray-500 mb-3">All transactions are secure and encrypted.</p>
                     
                     <div class="checkout-radio-group">
-                        <label class="checkout-radio-item active">
-                            <input type="radio" name="payment_method" value="cod" checked class="mr-3 w-5 h-5 accent-black">
-                            <span class="text-sm font-medium">Cash on Delivery (COD)</span>
+                        <label class="checkout-radio-item items-start">
+                            <input type="radio" name="payment" value="card" class="mt-1 mr-3 w-5 h-5 accent-black" onclick="togglePaymentForms('card-form')">
+                            <div class="flex-1">
+                                <div class="flex justify-between items-center w-full">
+                                    <span class="text-sm font-medium">Credit card</span>
+                                    <div class="flex gap-1">
+                                        <div class="w-8 h-5 bg-[#1434cb] rounded text-white flex items-center justify-center text-[8px] font-bold italic">VISA</div>
+                                    </div>
+                                </div>
+                            </div>
                         </label>
+                        
+                        <div id="card-form" class="hidden bg-gray-50 p-4 border-b border-gray-200 space-y-3">
+                            <div class="relative">
+                                <input type="text" placeholder="Card number" class="checkout-input">
+                                <i class="ph ph-lock-key absolute right-3 top-3 text-gray-400 text-lg"></i>
+                            </div>
+                        </div>
+
+                        <label class="checkout-radio-item justify-between active">
+                            <div class="flex items-center">
+                                <input type="radio" name="payment" value="installments" checked class="mr-3 w-5 h-5 accent-black" onclick="togglePaymentForms('redirect-msg')">
+                                <span class="text-sm font-medium">Cards - Installments - Wallets</span>
+                            </div>
+                        </label>
+                        <div id="redirect-msg" class="block bg-gray-50 p-6 border-b border-gray-200 text-center text-sm text-gray-700">
+                            You'll be redirected to complete your purchase securely.
+                        </div>
+
                         <label class="checkout-radio-item">
-                            <input type="radio" name="payment_method" value="online" class="mr-3 w-5 h-5 accent-black">
-                            <span class="text-sm font-medium">Cards / Wallets</span>
+                            <input type="radio" name="payment" value="cod" class="mr-3 w-5 h-5 accent-black" onclick="togglePaymentForms('none')">
+                            <span class="text-sm font-medium">Cash on Delivery (COD)</span>
                         </label>
                     </div>
                 </div>
 
                 <!-- Pay Now Bottom Area -->
                 <div class="mt-8 border-t border-gray-200 pt-6">
-                    <button id="submit-order-btn" type="submit" class="w-full bg-black text-white rounded-lg py-4 font-bold text-lg hover:bg-gray-800 transition shadow-lg flex items-center justify-center gap-2">
-                        <span>Complete Order (Pay Now)</span>
+                    <div class="flex items-center gap-3 mb-6">
+                        <img id="checkout-bottom-img" src="" class="w-12 h-12 object-cover border border-gray-200 rounded mix-blend-multiply" alt="Product">
+                        <div class="flex-1 flex justify-between items-center">
+                            <span class="text-lg font-bold text-black">Total</span>
+                            <div class="text-black">
+                                <span class="text-xs text-gray-500 font-normal mr-1">EGP</span>
+                                <span id="checkout-pay-total" class="text-xl font-bold">E£0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="submitOrderToDatabase(event)" id="submit-order-btn" class="w-full bg-black text-white rounded-lg py-4 font-bold text-lg hover:bg-gray-800 transition shadow-lg">
+                        Pay now
                     </button>
                 </div>
-            </form>
+            </div> <!-- نهاية حاوية الدفع -->
 
-            <!-- شاشة تأكيد الطلب داخل الموقع (تظهر بعد الحفظ في الداشبورد مباشرة) -->
+            <!-- رسالة نجاح الطلب (تظهر بعد الحفظ في قاعدة البيانات) -->
             <div id="order-success-modal" class="hidden mt-6 p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
                 <div class="w-14 h-14 rounded-full bg-emerald-500 text-white flex items-center justify-center mx-auto text-3xl shadow-md">
                     <i class="ph-bold ph-check"></i>
                 </div>
                 <h3 class="text-xl font-black text-black uppercase">Order Confirmed!</h3>
-                <p class="text-sm text-gray-700">تم تسجيل طلبك بنجاح في النظام وإرساله للإدارة للتجهيز.</p>
+                <p class="text-sm text-gray-700">تم تسجيل طلبك بنجاح في النظام.</p>
                 <p id="confirmed-order-number" class="text-base font-mono font-bold text-emerald-800 bg-emerald-100 inline-block px-4 py-1.5 rounded-lg">Order #LE-1001</p>
                 <div class="pt-3">
                     <button type="button" onclick="showPage('home-page')" class="bg-black text-white px-6 py-3 rounded-lg text-xs font-bold uppercase tracking-wider">
@@ -410,24 +658,82 @@
                 </div>
             </div>
 
+            <!-- Footer Links Checkout -->
+            <div class="mt-8 pt-4 border-t border-gray-200 flex flex-wrap gap-4 text-xs text-gray-500 font-medium pb-10">
+                <a href="#" class="hover:underline hover:text-black">Refund policy</a>
+                <a href="#" class="hover:underline hover:text-black">Shipping</a>
+                <a href="#" class="hover:underline hover:text-black">Privacy policy</a>
+                <a href="#" class="hover:underline hover:text-black">Terms of service</a>
+                <a href="#" class="hover:underline hover:text-black">Contact</a>
+            </div>
+
         </div>
     </div>
 
-    <!-- JavaScript & Supabase Direct Integration -->
+
+    <!-- Sticky Bottom Bar (Product Page) -->
+    <div id="sticky-cart-bar" class="hidden fixed bottom-0 left-0 w-full bg-[#E0E0E0] border-t border-gray-300 p-3 justify-between items-center z-40 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+        <div class="flex items-center gap-3">
+            <img id="sticky-product-image" src="" class="w-10 h-10 object-cover mix-blend-multiply border border-gray-300 bg-white" alt="Thumb">
+            <div>
+                <p id="sticky-product-title" class="text-sm font-bold uppercase leading-tight">Product Name</p>
+                <p class="text-[11px] font-semibold text-gray-600">S</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-4">
+            <span id="sticky-product-price" class="text-sm font-bold uppercase">LE 0.00</span>
+            <button onclick="goToCheckout()" class="bg-black text-white w-10 h-10 flex items-center justify-center hover:bg-gray-800 transition">
+                <i class="ph ph-bag-simple text-xl"></i><span class="text-xs font-bold -ml-1">+</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer id="global-footer" class="w-full bg-black text-white pt-16 pb-6 px-6 text-center sm:text-left mt-auto z-10 relative">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-10 mb-12">
+            <div>
+                <h3 class="logo-font text-lg font-bold uppercase tracking-widest mb-4">LIZTR ESSENS</h3>
+                <p class="text-sm text-gray-400 font-medium leading-relaxed max-w-xs mx-auto sm:mx-0">How the streets rock Essens. Premium streetwear for the lost era.</p>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-widest mb-4">Quick Links</h4>
+                <ul class="text-sm text-gray-400 space-y-3 font-medium">
+                    <li><a href="#" class="hover:text-white transition">Shop All</a></li>
+                    <li><a href="#" class="hover:text-white transition">New Arrivals</a></li>
+                    <li><a href="#" class="hover:text-white transition">Lookbook</a></li>
+                    <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-sm font-bold uppercase tracking-widest mb-4">Follow The Cult</h4>
+                <div class="flex justify-center sm:justify-start gap-5">
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="ph ph-instagram-logo text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="ph ph-tiktok-logo text-2xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition"><i class="ph ph-facebook-logo text-2xl"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-6 flex flex-col items-center justify-center text-[11px] sm:text-xs text-gray-500 font-bold tracking-widest uppercase">
+            <p class="mb-2">© 2026 LIZTR ESSENS. ALL RIGHTS RESERVED.</p>
+            <p class="text-white">Developed by VORTX DEV</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript الأصلي + Supabase -->
     <script>
-        // 1. إعدادات مشروع Supabase النشط (liztr-essens)
+        // إعدادات Supabase (مطابقة للداشبورد تماماً)
         const SUPABASE_URL = 'https://wmnqwuvjfmubfdnygixn.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_ScRBm4HCXF5FlK3lzi4PKg_m_hvD00f';
         const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // متغيرات المنتج المختار
-        let globalProductId = null;
-        let globalProductName = 'DARK OLIVE 09 JRSY';
-        let globalProductPrice = 790;
-        let globalProductImg = 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787450019/1_3a9e03c1-ce69-4e3b-b921-337b1b4e8a91_fnryux.png';
+        // متغيرات عامة
+        let globalProductName = '';
+        let globalProductPrice = 0;
+        let globalProductImg = '';
         let globalSelectedSize = 'S';
         let globalQuantity = 1;
 
+        // دوال التحكم في المقاس والكمية
         function selectSize(size, btnEl) {
             globalSelectedSize = size;
             document.getElementById('selected-size-label').textContent = size;
@@ -442,10 +748,9 @@
             document.getElementById('product-qty').textContent = globalQuantity;
         }
 
-        function openProduct(name, currentPriceStr, oldPriceStr, imgUrl, prodId = null) {
-            globalProductId = prodId;
+        function openProduct(name, currentPriceStr, oldPriceStr, imgUrl) {
             globalProductName = name;
-            globalProductPrice = parseFloat(currentPriceStr);
+            globalProductPrice = parseInt(currentPriceStr);
             globalProductImg = imgUrl;
             globalQuantity = 1;
             document.getElementById('product-qty').textContent = '1';
@@ -454,6 +759,10 @@
             document.getElementById('main-product-price').textContent = currentPriceStr + ' L.E';
             document.getElementById('main-product-old-price').textContent = oldPriceStr + ' L.E';
             document.getElementById('main-product-image').src = imgUrl;
+
+            document.getElementById('sticky-product-title').textContent = name;
+            document.getElementById('sticky-product-price').textContent = 'LE ' + currentPriceStr + '.00';
+            document.getElementById('sticky-product-image').src = imgUrl;
 
             showPage('product-page');
         }
@@ -465,6 +774,7 @@
 
             document.getElementById('checkout-name').textContent = globalProductName;
             document.getElementById('checkout-img').src = globalProductImg;
+            document.getElementById('checkout-bottom-img').src = globalProductImg;
             document.getElementById('checkout-size-text').textContent = `Size: ${globalSelectedSize}`;
             document.getElementById('checkout-qty-badge').textContent = globalQuantity;
             
@@ -474,30 +784,41 @@
             const totalFormatted = `E£${totalCost.toFixed(2)}`;
             document.getElementById('checkout-header-total').textContent = totalFormatted;
             document.getElementById('checkout-final-total').textContent = totalFormatted;
+            document.getElementById('checkout-pay-total').textContent = totalFormatted;
 
-            // إعادة إظهار الفورم وإخفاء رسالة النجاح السابقة
-            document.getElementById('checkout-form').classList.remove('hidden');
+            // إعادة تعيين الفورم (إظهار الفورم وإخفاء رسالة النجاح في حال كان العميل اشترى من قبل)
+            document.getElementById('checkout-form-container').classList.remove('hidden');
             document.getElementById('order-success-modal').classList.add('hidden');
 
             showPage('checkout-page');
         }
 
-        // حفظ الطلب مباشرة في قاعدة بيانات Supabase وبدون أي تحويل إلى واتساب
+        // دالة حفظ الطلب في قاعدة البيانات بدون واتساب
         async function submitOrderToDatabase(e) {
-            e.preventDefault();
+            if (e) e.preventDefault();
             const submitBtn = document.getElementById('submit-order-btn');
+            const originalText = submitBtn.innerText;
             submitBtn.disabled = true;
-            submitBtn.innerHTML = `<span>Saving Order...</span>`;
+            submitBtn.innerText = 'Processing...';
 
-            const email = document.getElementById('cust-email').value.trim();
-            const first_name = document.getElementById('cust-fname').value.trim();
-            const last_name = document.getElementById('cust-lname').value.trim();
-            const address = document.getElementById('cust-address').value.trim();
-            const apartment = document.getElementById('cust-apt').value.trim();
-            const city = document.getElementById('cust-city').value.trim();
-            const governorate = document.getElementById('cust-gov').value;
-            const phone = document.getElementById('cust-phone').value.trim();
-            const payment_method = document.querySelector('input[name="payment_method"]:checked').value;
+            const email = document.getElementById('cust-email')?.value || '';
+            const first_name = document.getElementById('cust-fname')?.value || '';
+            const last_name = document.getElementById('cust-lname')?.value || '';
+            const address = document.getElementById('cust-address')?.value || '';
+            const apartment = document.getElementById('cust-apt')?.value || '';
+            const city = document.getElementById('cust-city')?.value || '';
+            const governorate = document.getElementById('cust-gov')?.value || '';
+            const phone = document.getElementById('cust-phone')?.value || '';
+            
+            const paymentRadio = document.querySelector('input[name="payment"]:checked');
+            let payment_method = paymentRadio ? paymentRadio.value : 'online';
+
+            if (!first_name || !phone || !address || !city) {
+                alert('الرجاء إدخال بيانات التوصيل الأساسية (الاسم، العنوان، المدينة، رقم الهاتف).');
+                submitBtn.disabled = false;
+                submitBtn.innerText = originalText;
+                return;
+            }
 
             const shipping_cost = 85;
             const subtotal = globalProductPrice * globalQuantity;
@@ -505,37 +826,20 @@
             const itemSummary = `${globalProductName} (Size: ${globalSelectedSize}) x${globalQuantity}`;
 
             try {
-                // 1. إدخال الطلب في جدول orders
+                // حفظ الطلب في جدول Orders
                 const { data: orderData, error: orderError } = await supabaseClient
                     .from('orders')
                     .insert([{
-                        email,
-                        first_name,
-                        last_name,
-                        phone,
-                        country: 'Egypt',
-                        governorate,
-                        city,
-                        address,
-                        apartment,
-                        shipping_method: 'standard',
-                        shipping_cost,
-                        subtotal,
-                        total,
-                        payment_method,
-                        payment_status: 'pending',
-                        status: 'new',
-                        notes: itemSummary
+                        email, first_name, last_name, phone, country: 'Egypt', governorate, city, address, apartment,
+                        shipping_method: 'standard', shipping_cost, subtotal, total, payment_method, payment_status: 'pending', status: 'new', notes: itemSummary
                     }])
-                    .select()
-                    .single();
+                    .select().single();
 
                 if (orderError) throw orderError;
 
-                // 2. إدخال تفاصيل القطعة في جدول order_items
+                // حفظ تفاصيل القطعة في جدول Order Items
                 await supabaseClient.from('order_items').insert([{
                     order_id: orderData.id,
-                    product_id: globalProductId,
                     product_name: globalProductName,
                     size: globalSelectedSize,
                     unit_price: globalProductPrice,
@@ -543,32 +847,171 @@
                     image_url: globalProductImg
                 }]);
 
-                // 3. إظهار رسالة تأكيد الطلب داخل الموقع بدون واتساب
-                document.getElementById('checkout-form').classList.add('hidden');
+                // إخفاء الفورم وإظهار رسالة النجاح
+                document.getElementById('checkout-form-container').classList.add('hidden');
                 document.getElementById('confirmed-order-number').textContent = `Order #${orderData.order_number}`;
                 document.getElementById('order-success-modal').classList.remove('hidden');
-                document.getElementById('checkout-form').reset();
+
+                // إرسال Order Event إلى Facebook Pixel إن وجد مستقبلاً هنا
 
             } catch (err) {
-                alert('حدث خطأ أثناء حفظ الطلب: ' + err.message);
+                alert('حدث خطأ غير متوقع أثناء معالجة الطلب: ' + err.message);
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>Complete Order (Pay Now)</span>`;
+                submitBtn.innerText = originalText;
             }
         }
 
+        // --- باقي دوال الموقع الأصلية بالكامل لضمان عمل كل شيء 100% ---
         function showPage(pageId) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            
             document.getElementById('home-page').classList.replace('block', 'hidden');
             document.getElementById('product-page').classList.replace('block', 'hidden');
             document.getElementById('checkout-page').classList.replace('block', 'hidden');
+            
             document.getElementById(pageId).classList.replace('hidden', 'block');
+            
+            const stickyBar = document.getElementById('sticky-cart-bar');
+            const globalFooter = document.getElementById('global-footer');
+
+            if(pageId === 'product-page') {
+                stickyBar.classList.replace('hidden', 'flex');
+                globalFooter.classList.replace('hidden', 'block');
+            } else if (pageId === 'checkout-page') {
+                stickyBar.classList.replace('flex', 'hidden');
+                globalFooter.classList.replace('block', 'hidden');
+            } else {
+                stickyBar.classList.replace('flex', 'hidden');
+                globalFooter.classList.replace('hidden', 'block');
+            }
+        }
+
+        function togglePaymentForms(formIdToShow) {
+            document.getElementById('card-form').classList.replace('block', 'hidden');
+            document.getElementById('redirect-msg').classList.replace('block', 'hidden');
+
+            const labels = document.querySelectorAll('.checkout-radio-item');
+            labels.forEach(l => l.classList.remove('active'));
+
+            if(formIdToShow !== 'none') {
+                const targetForm = document.getElementById(formIdToShow);
+                if(targetForm) targetForm.classList.replace('hidden', 'block');
+            }
+            
+            setTimeout(() => {
+                const checkedRadio = document.querySelector('input[name="payment"]:checked');
+                if(checkedRadio) checkedRadio.closest('.checkout-radio-item').classList.add('active');
+            }, 10);
         }
 
         function toggleAccordion(contentId, iconId) {
             const content = document.getElementById(contentId);
-            content.classList.toggle('open');
+            const icon = document.getElementById(iconId);
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                if(icon) icon.style.transform = "rotate(180deg)";
+                if(icon.textContent === '−') icon.textContent = '+';
+            } else {
+                content.classList.add('open');
+                if(icon) icon.style.transform = "rotate(0deg)";
+                if(icon.textContent === '+') icon.textContent = '−';
+            }
+        }
+
+        const camoVariants = {
+            'dark': { name: 'DARK OLIVE 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787453476/2_20260823_055048_0001_wfsfjm.png' },
+            'gray': { name: 'GRAY CAMO 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787453486/1_20260823_055048_0000_lb2mne.png' }
+        };
+
+        const solidVariants = {
+            'olive': { name: 'OLIVE 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455932/3_20260823_063129_0000_ulofbv.png' },
+            'wine': { name: 'RED WINE 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455946/4_20260823_063129_0001_flasoy.png' },
+            'black': { name: 'BLACK 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455947/5_20260823_063129_0002_cpattq.png' },
+            'white': { name: 'WHITE 09 JRSY', img: 'https://res.cloudinary.com/dyhlzplzb/image/upload/v1787455934/6_20260823_063129_0003_pzftch.png' }
+        };
+
+        let camoTimeout, solidTimeout;
+
+        function changeCamoVariant(color) { updateVariant('camo', color, camoVariants); }
+        function changeSolidVariant(color) { updateVariant('solid', color, solidVariants); }
+
+        function updateVariant(section, color, variantsObj) {
+            const imgEl = document.getElementById(`interactive-img-${section}`);
+            const nameEl = document.getElementById(`interactive-name-${section}`);
+            
+            if(section === 'camo') clearTimeout(camoTimeout);
+            if(section === 'solid') clearTimeout(solidTimeout);
+            
+            imgEl.style.opacity = '0';
+            nameEl.style.opacity = '0';
+            
+            const keys = Object.keys(variantsObj);
+            keys.forEach(c => {
+                const btn = document.getElementById(`swatch-${section}-${c}`);
+                if(c === color) {
+                    btn.classList.add('ring-2', 'ring-black', 'border-black');
+                    btn.classList.replace('border-gray-400', 'border-black');
+                    btn.classList.add('border-2');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-black', 'border-black', 'border-2');
+                    btn.classList.add('border-gray-400');
+                }
+            });
+
+            const timeoutId = setTimeout(() => {
+                imgEl.src = variantsObj[color].img;
+                nameEl.textContent = variantsObj[color].name;
+                imgEl.style.opacity = '1';
+                nameEl.style.opacity = '1';
+            }, 300);
+
+            if(section === 'camo') camoTimeout = timeoutId;
+            if(section === 'solid') solidTimeout = timeoutId;
+        }
+
+        const slider = document.getElementById('product-slider');
+        let isDown = false, startX, scrollLeft, autoPlayInterval;
+
+        function startAutoScroll() {
+            stopAutoScroll();
+            if(!slider) return;
+            autoPlayInterval = setInterval(() => {
+                const maxScroll = slider.scrollWidth - slider.clientWidth;
+                if (slider.scrollLeft >= maxScroll - 5) {
+                    slider.scrollTo({ left: 0, behavior: 'smooth' });
+                } else {
+                    const cardWidth = slider.querySelector('.slider-item').offsetWidth;
+                    slider.scrollBy({ left: cardWidth + 24, behavior: 'smooth' }); 
+                }
+            }, 3000); 
+        }
+
+        function stopAutoScroll() { clearInterval(autoPlayInterval); }
+
+        if(slider) {
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('cursor-grabbing');
+                slider.classList.remove('cursor-grab');
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+                stopAutoScroll(); 
+            });
+            slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('cursor-grabbing'); slider.classList.add('cursor-grab'); startAutoScroll(); });
+            slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('cursor-grabbing'); slider.classList.add('cursor-grab'); startAutoScroll(); });
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 1.5; 
+                slider.scrollLeft = scrollLeft - walk;
+            });
+            slider.addEventListener('touchstart', stopAutoScroll, {passive: true});
+            slider.addEventListener('touchend', startAutoScroll, {passive: true});
+            startAutoScroll();
         }
     </script>
 </body>
 </html>
+```eof
